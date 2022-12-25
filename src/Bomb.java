@@ -36,12 +36,11 @@ public class Bomb {
         }
 
 
-        for (int i = 0; i < commands.size(); i++) {
+        while (commands.size()!=0){
             if (!hitEnd && bombInField != 0) {
                 switch (commands.get(0)) {
                     case "up":
                         commands.remove(0);
-                        i--;
                         if (rowSapper - 1 >= 0) {
                             field[rowSapper][collSapper] = "+";
                             rowSapper--;
@@ -50,7 +49,6 @@ public class Bomb {
                         break;
                     case "down":
                         commands.remove(0);
-                        i--;
                         if (rowSapper + 1 < fieldSize) {
                             field[rowSapper][collSapper] = "+";
                             rowSapper++;
@@ -59,7 +57,6 @@ public class Bomb {
                         break;
                     case "left":
                         commands.remove(0);
-                        i--;
                         if (collSapper - 1 >= 0) {
                             field[rowSapper][collSapper] = "+";
                             collSapper--;
@@ -68,7 +65,6 @@ public class Bomb {
                         break;
                     case "right":
                         commands.remove(0);
-                        i--;
                         if (collSapper + 1 < fieldSize) {
                             field[rowSapper][collSapper] = "+";
                             collSapper++;
@@ -83,8 +79,10 @@ public class Bomb {
 
         if (bombInField == 0) {
             System.out.println("Congratulations! You found all bombs!");
-        } else {
+        } else if (hitEnd){
             System.out.printf("END! %d bombs left on the field", bombInField);
+        } else if (commands.size() == 0 ) {
+            System.out.printf("%d bombs left on the field. Sapper position: (%d,%d)", bombInField, rowSapper, collSapper);
         }
     }
 
